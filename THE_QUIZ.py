@@ -1,13 +1,10 @@
 import random
 
+LETTERS = ["A", "B", "C", "D"]
+
 def quiz_question():
-    num1 = random.randint(1, 99)
     num2 = random.randint(1, 9)
-      
-    while num1 % num2 != 0:
-            num1 = random.randint(1, 99)
-            num2 = random.randint(1, 9)
-    
+    num1 = num2 * random.randint(1, 11) 
     num3 = int(num1 / num2)
     num4 = random.randint(1, 9)
     correct_answer = num3 * num4
@@ -17,9 +14,8 @@ def quiz_question():
     options = [correct_answer, wrong1, wrong2, wrong3]
     random.shuffle(options)
     position = options.index(correct_answer)
-    letters = ["A", "B", "C", "D"]
-    correct_letter = letters[position]
-    
+    correct_letter = LETTERS[position]
+
     question_text = f"if {num1} / {num2} is {num3} what is {num3} * {num4}?"
     return question_text, options, correct_letter
 
@@ -28,12 +24,11 @@ for question_number in range(5):
     question_text, options, correct_letter = quiz_question()
     print(question_text)
 
-    letters = ["A", "B", "C", "D"]
-    for letter, option in zip(letters, options):
+    for letter, option in zip(LETTERS, options):
         print(f"{letter}. {option}")
 
     user_answer = input("Enter your answer (A-D): ").upper()
-    while user_answer not in letters:
+    while user_answer not in LETTERS:
         print("Invalid input. Please enter A, B, C, or D.")
         user_answer = input("Enter your answer (A-D): ").upper()
 
@@ -49,7 +44,5 @@ if score >= 5:
     print("Excellent")
 elif score >= 3:
     print("Good")
-elif score >= 1:
-    print("Needs Improvement")
 else:
     print("Needs Improvement")
